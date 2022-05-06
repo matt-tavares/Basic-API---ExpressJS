@@ -1,0 +1,36 @@
+QUNATIDADE DE CURSOS POR INSTITUIÇÃO
+
+SELECT curso.id_instituicao, instituicao.tx_descricao AS nome, COUNT(*) AS qunatidade_de_cursos
+FROM "production"."curso", "production"."instituicao"
+WHERE curso.id_instituicao = instituicao.id_instituicao
+GROUP BY curso.id_instituicao, instituicao.tx_descricao
+ORDER BY COUNT(*) DESC;
+
+===============================================================
+
+QUNATIDADE DE DISCIPLINAS POR PROFESSOR
+
+SELECT l.id_professor, p.tx_nome AS nome, COUNT(*) AS quantidade
+FROM "production"."leciona" l, "production"."professor" p
+WHERE l.id_professor = p.id_professor
+GROUP BY l.id_professor, p.tx_nome
+ORDER BY COUNT(*) DESC;
+
+===============================================================
+
+QUNATIDADE DE PROFESSORES POR ESTADO CIVIL
+
+SELECT tx_estado_civil AS estado_civil, COUNT(*) AS quantidade
+FROM "production"."professor"
+GROUP BY tx_estado_civil
+ORDER BY COUNT(*) DESC;
+
+===============================================================
+
+QUNATIDADE DE REPROVAÇÕES POR ANO
+
+SELECT in_ano AS ano, COUNT(*) AS quantidade
+FROM "production"."cursa"
+WHERE bl_aprovado = FALSE
+GROUP BY in_ano
+ORDER BY COUNT(*) DESC;
